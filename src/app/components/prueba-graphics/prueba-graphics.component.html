@@ -1,0 +1,10 @@
+<!-- <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTUQ89ufHH67GElJ_TH8dvdTli8ZqKkPt_Fhdb318YxDa0rVYI1sZtmhnqDlY6aJtLtJR7A5Q-nyf3j/pubhtml?widget=true&amp;headers=false" width="100%" height="600"></iframe> -->
+<!-- <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTUQ89ufHH67GElJ_TH8dvdTli8ZqKkPt_Fhdb318YxDa0rVYI1sZtmhnqDlY6aJtLtJR7A5Q-nyf3j/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%"></iframe> -->
+<div>
+    <hot-table #spreadsheet [settings]="settingsTable" [hotId]="id"></hot-table>
+</div>
+<button (click)="getTableData();">Guardar</button>
+
+<div>
+    <canvasjs-chart [options]="chartOptions" [styles]="{width: '480px', height:'360px'}"></canvasjs-chart>    
+</div>                        
