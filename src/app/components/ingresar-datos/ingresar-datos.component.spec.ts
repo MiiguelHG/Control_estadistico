@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IngresarDatos } from './ingresar-datos';
+import { IngresarDatosComponent } from './ingresar-datos.component';
 
-describe('IngresarDatos', () => {
-  let component: IngresarDatos;
-  let fixture: ComponentFixture<IngresarDatos>;
+describe('IngresarDatosComponent', () => {
+  let component: IngresarDatosComponent;
+  let fixture: ComponentFixture<IngresarDatosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IngresarDatos]
+      imports: [IngresarDatosComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(IngresarDatos);
+    fixture = TestBed.createComponent(IngresarDatosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

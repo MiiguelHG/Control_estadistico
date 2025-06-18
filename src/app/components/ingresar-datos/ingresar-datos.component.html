@@ -1,0 +1,36 @@
+<div class="container my-3 d-flex justify-content-center">
+  <hot-table #spreadsheet [settings]="settingsTable" [hotId]="id"></hot-table>
+</div>
+<div class="container my-4 d-flex justify-content-center">
+    
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">Medidas</div>
+            <div class="col">Distribución</div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarTendenciasCentrales = !mostrarTendenciasCentrales;">Tendencia Central</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Dispersión</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Forma</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Localización</button> &nbsp;
+            </div>
+
+            <div class="col">
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Histograma</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Parametros</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Limites Reales</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Cajas y bigotes</button> &nbsp;
+            </div> 
+
+        </div>
+    </div>    
+</div>
+
+<div class="container my-4 d-flex justify-content-center">
+    @if(mostrarTendenciasCentrales) {
+        <app-tendencias-central [data]="data"></app-tendencias-central>
+    }
+</div>
+
