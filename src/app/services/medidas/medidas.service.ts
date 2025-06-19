@@ -70,4 +70,36 @@ export class MedidasService {
     // console.log('Modas:', modes); // Mostrar las modas en la consola
     return modes.length > 0 ? modes[0] : 0; // Retornar la primera moda o 0 si no hay modas
   }
+
+  // Método para obtener la varianza populacional de los datos ---------------------------------------------
+  public getVarianzaPopulacional(): number {
+    const array = this.matrizToArray(); // Obtener el array de datos
+    if (array.length === 0) return 0; // Retornar 0 si el array está vacío
+
+    const media = this.getMedia(); // Obtener la media
+    const variance = array.reduce((acc, val) => acc + Math.pow(val - media, 2), 0) / array.length; // Calcular la varianza
+    return variance; // Retornar la varianza
+  }
+
+  // Método para obtener la varianza muestral de los datos ---------------------------------------------
+  public getVarianzaMuestral(): number {
+    const array = this.matrizToArray(); // Obtener el array de datos
+    if (array.length <= 1) return 0; // Retornar 0 si el array tiene 1 o menos elementos
+
+    const media = this.getMedia(); // Obtener la media
+    const variance = array.reduce((acc, val) => acc + Math.pow(val - media, 2), 0) / (array.length - 1); // Calcular la varianza muestral
+    return variance; // Retornar la varianza muestral
+  }
+
+  // Método para obtener la desviación estándar poblacional de los datos ---------------------------------------------
+  public getDesviacionEstandarPopulacional(): number {
+    const varianza = this.getVarianzaPopulacional(); // Obtener la varianza poblacional
+    return Math.sqrt(varianza); // Retornar la raíz cuadrada de la varianza
+  }
+
+  // Método para obtener la desviación estándar muestral de los datos ---------------------------------------------
+  public getDesviacionEstandarMuestral(): number {
+    const varianza = this.getVarianzaMuestral(); // Obtener la varianza muestral
+    return Math.sqrt(varianza); // Retornar la raíz cuadrada de la varianza muestral
+  }
 }

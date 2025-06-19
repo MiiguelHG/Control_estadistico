@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col">
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarTendenciasCentrales = !mostrarTendenciasCentrales;">Tendencia Central</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Dispersión</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarDispersion = !mostrarDispersion">Dispersión</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Forma</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Localización</button> &nbsp;
             </div>
@@ -28,9 +28,11 @@
     </div>    
 </div>
 
-<div class="container my-4 d-flex justify-content-center">
-    @if(mostrarTendenciasCentrales) {
-        <app-tendencias-central></app-tendencias-central>
-    }
-</div>
+@if(mostrarTendenciasCentrales) {
+    <app-tendencias-central></app-tendencias-central>
+}
+
+@if (mostrarDispersion) {
+    <app-dispersion></app-dispersion>
+}
 
