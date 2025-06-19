@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { HotTableModule, HotTableRegisterer } from '@handsontable/angular';
 import Handsontable from 'handsontable';
 import { TendenciasCentralComponent } from "../tendencias-central/tendencias-central.component";
+import { MedidasService } from '../../services/medidas/medidas.service';
 
 @Component({
   selector: 'app-ingresar-datos',
@@ -11,6 +12,8 @@ import { TendenciasCentralComponent } from "../tendencias-central/tendencias-cen
   styleUrl: './ingresar-datos.component.css'
 })
 export class IngresarDatosComponent {
+  medidasService = inject(MedidasService); // Inyectar el servicio MedidasService
+
   data = [[]]; // Matriz para almacenar los datos de la tabla Handsontable
 
   private hotRegisterer = new HotTableRegisterer();
@@ -54,9 +57,7 @@ export class IngresarDatosComponent {
 
     this.data = datosLimpios.filter(row => row.length > 0); // Filtrar filas vacías y eliminar filas sin datos
 
-    // console.log('Datos de la tabla:', data);
-    // console.log('Datos filtrados:', this.data);
-    // return data;
+    this.medidasService.setData(this.data) // Actualizar el servicio con los datos
   }
 
   // Método para limpiar la tabla

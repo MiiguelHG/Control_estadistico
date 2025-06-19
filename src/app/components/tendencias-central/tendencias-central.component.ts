@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { MedidasService } from '../../services/medidas/medidas.service';
 
 @Component({
   selector: 'app-tendencias-central',
@@ -7,10 +8,9 @@ import { Component, Input } from '@angular/core';
   styleUrl: './tendencias-central.component.css'
 })
 export class TendenciasCentralComponent {
-  @Input() data: number[][] = []; // Matriz para almacenar los datos de la tabla Handsontable
+  medidasService = inject(MedidasService); // Inyectar el servicio MedidasService
 
-  showData() {
-    // Método para mostrar los datos en la consola
-    console.log('Datos de Tendencias Centrales:', this.data);
-  }
+  media = this.medidasService.getMedia(); // Obtener la media de los datos
+  mediana = this.medidasService.getMediana(); // Obtener la mediana de los datos
+  moda = this.medidasService.getModa(); // Obtener la moda de los datos
 }
