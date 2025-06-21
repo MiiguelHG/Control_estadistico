@@ -102,4 +102,76 @@ export class MedidasService {
     const varianza = this.getVarianzaMuestral(); // Obtener la varianza muestral
     return Math.sqrt(varianza); // Retornar la raíz cuadrada de la varianza muestral
   }
+
+  // Medidas de forma 
+  // Método para obtener el coeficiente de asimetría de Pearson ---------------------------------------------
+  public getCoeficienteAsimetriaPearson(): number {
+    const media = this.getMedia(); // Obtener la media
+    const mediana = this.getMediana(); // Obtener la mediana
+    const desviacionEstandar = this.getDesviacionEstandarPopulacional(); // Obtener la desviación estándar populacional
+
+    if (desviacionEstandar === 0) return 0; // Retornar 0 si la desviación estándar es 0
+
+    // Calcular el coeficiente de asimetría de Pearson
+    return (3 * (media - mediana)) / desviacionEstandar;
+  }
+
+  // Método para obtener el sesgo estandarizado de skewness ---------------------------------------------
+  public getSesgoEstandarizadoSkewness(): number {
+    const sesgo = this.getCoeficienteAsimetriaPearson(); // Obtener el sesgo
+    return sesgo / Math.sqrt(6 / this.data.length); // Calcular el sesgo estandarizado de skewness
+  }
+
+  // Calculo de persentiles
+  // Método para obtener el percentil de un conjunto de datos ---------------------------------------------
+  public getLocalizacion(p: number, k: number): number {
+    const array = this.matrizToArray(); // Obtener el array de datos
+    if (array.length === 0) return 0; // Retornar 0 si el array está vacío
+
+    const sortedArray = [...array].sort((a, b) => a - b); // Ordenar el array
+    const index = (p / k) * (sortedArray.length - 1); // Calcular el índice del percentil
+    const lowerIndex = Math.floor(index); // Índice inferior
+    return sortedArray[lowerIndex] + ((index-lowerIndex)*(sortedArray[lowerIndex + 1] -  sortedArray[lowerIndex])); // Retornar el valor del percentil
+  }
+
+  // Método para obtener el coheficiente de curtosis ---------------------------------------------
+  public getCurtosis(): number {
+    const array = this.matrizToArray(); // Obtener el array de datos
+    if (array.length === 0) return 0; // Retornar 0 si el array está vacío
+    const sortedArray = [...array].sort((a, b) => a - b); // Ordenar el array
+    const pc75 = this.getLocalizacion(75, 100); // Obtener el percentil 75 (Q3)
+    const pc25 = this.getLocalizacion(25, 100); // Obtener el percentil 25 (Q1)
+    const pc90 = this.getLocalizacion(90, 100); // Obtener el percentil 90 (P90)
+    const pc10 = this.getLocalizacion(10, 100); // Obtener el percentil 10 (P10)
+
+    // Calcular la curtosis utilizando la fórmula
+    return (pc75 - pc25) / (2 * (pc90 - pc10));
+  }
+
+  // Metodo para obterner el rango de los datos ---------------------------------------------
+  public getRango(): number {
+    const array = this.matrizToArray(); // Obtener el array de datos
+    if (array.length === 0) return 0; // Retornar 0 si el array está vacío
+
+    const max = Math.max(...array); // Obtener el valor máximo
+    const min = Math.min(...array); // Obtener el valor mínimo
+    return max - min; // Retornar el rango
+  }
+
+  // Metodo para obtener el valor máximo de los datos ---------------------------------------------
+  public getMaximo(): number {
+    const array = this.matrizToArray(); // Obtener el array de datos
+    if (array.length === 0) return 0; // Retornar 0 si el array está vacío
+
+    return Math.max(...array); // Retornar el valor máximo
+  }
+
+  // Metodo para obtener el valor mínimo de los datos ---------------------------------------------
+  public getMinimo(): number {
+    const array = this.matrizToArray(); // Obtener el array de datos
+    if (array.length === 0) return 0; // Retornar 0 si el array está vacío
+
+    return Math.min(...array); // Retornar el valor mínimo
+  }
 }
+

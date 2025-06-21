@@ -1,0 +1,42 @@
+<div class="container justify-content-center my-3">
+    <button type="button" class="btn btn-outline-primary" (click)="op = 1; calcularCuartiles(4);">Cuartiles</button> &nbsp;
+    <button type="button" class="btn btn-outline-primary" (click)="op = 1; calcularCuartiles(5);">Quintiles</button> &nbsp;
+    <button type="button" class="btn btn-outline-primary" (click)="op = 1; calcularCuartiles(10);">Deciles</button> &nbsp;
+    <button type="button" class="btn btn-outline-primary" (click)="op = 2">Percentiles</button> &nbsp;
+</div>
+<div class="container">
+@if (op === 1) {
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (i of listCuartiles; let idx = $index; track idx) {
+                <tr>
+                <th scope="row">{{prefix}}{{idx + 1}}</th>
+                <td>{{i}}</td>
+                </tr>
+            
+            }
+        </tbody>
+    </table>
+}
+@else if (op === 2) {
+    <form class="row g-3">
+        <div class="col-auto">
+            <label for="staticEmail2" class="visually-hidden">Percentil</label>
+            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" [value]="'Percentil: ' + this.res">
+        </div>
+        <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">Percentil</label>
+            <input type="number" class="form-control" id="inputPassword2" placeholder="Ingrese el percentil" [(ngModel)]="percentil" name="percentil">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3" (click)="calcularPercentil();">calcular</button>
+        </div>
+    </form>
+}
+</div>

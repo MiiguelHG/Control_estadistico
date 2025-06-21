@@ -1,5 +1,9 @@
 <div class="container my-3 d-flex justify-content-center">
   <hot-table #spreadsheet [settings]="settingsTable" [hotId]="id"></hot-table>
+  <div>
+
+      <button type="button" class="btn btn-secondary" (click)="clearTable();">Limpiar</button>
+  </div>
 </div>
 <div class="container my-4 d-flex justify-content-center">
     
@@ -13,15 +17,15 @@
             <div class="col">
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarTendenciasCentrales = !mostrarTendenciasCentrales;">Tendencia Central</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarDispersion = !mostrarDispersion">Dispersión</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Forma</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Localización</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarForma = !mostrarForma">Forma</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarLocalizacion = !mostrarLocalizacion">Localización</button> &nbsp;
             </div>
 
             <div class="col">
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Histograma</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Parametros</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Limites Reales</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Cajas y bigotes</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarCajaBigotes = !mostrarCajaBigotes">Cajas y bigotes</button> &nbsp;
             </div> 
 
         </div>
@@ -36,3 +40,14 @@
     <app-dispersion></app-dispersion>
 }
 
+@if (mostrarForma) {
+    <app-forma></app-forma>
+}
+
+@if (mostrarCajaBigotes) {
+    <app-caja-bigotes></app-caja-bigotes>
+}
+
+@if (mostrarLocalizacion) {
+    <app-localizacion></app-localizacion>
+}

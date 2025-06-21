@@ -5,10 +5,13 @@ import Handsontable from 'handsontable';
 import { TendenciasCentralComponent } from "../tendencias-central/tendencias-central.component";
 import { MedidasService } from '../../services/medidas/medidas.service';
 import { DispersionComponent } from "../dispersion/dispersion.component";
+import { FormaComponent } from "../forma/forma.component";
+import { CajaBigotesComponent } from "../caja-bigotes/caja-bigotes.component";
+import { LocalizacionComponent } from "../localizacion/localizacion.component";
 
 @Component({
   selector: 'app-ingresar-datos',
-  imports: [HotTableModule, TendenciasCentralComponent, DispersionComponent],
+  imports: [HotTableModule, TendenciasCentralComponent, DispersionComponent, FormaComponent, CajaBigotesComponent, LocalizacionComponent],
   templateUrl: './ingresar-datos.component.html',
   styleUrl: './ingresar-datos.component.css'
 })
@@ -38,6 +41,9 @@ export class IngresarDatosComponent {
 
   mostrarTendenciasCentrales = false; // Bandera para mostrar u ocultar tendencias centrales
   mostrarDispersion = false; // Bandera para mostrar u ocultar medidas de dispersión
+  mostrarForma = false; // Bandera para mostrar u ocultar medidas de forma
+  mostrarCajaBigotes = false; // Bandera para mostrar u ocultar caja y bigotes
+  mostrarLocalizacion = false; // Bandera para mostrar u ocultar localización
 
   // Funcion para verificar si un valor es un número válido
   private esNumeroValido(valor: any): boolean {
