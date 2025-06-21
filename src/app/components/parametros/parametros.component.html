@@ -1,0 +1,107 @@
+<div class="frequency-table-container">
+  <h3>Tabla de Frecuencias</h3>
+  
+  <div *ngIf="frequencyTable.length > 0; else noData">
+    <table class="frequency-table">
+      <thead>
+        <tr>
+          <th>Clases</th>
+          <th>Intervalo <br>[L<sub>i</sub>-L<sub>s</sub>]</th>
+          <th>Marca de Clase (x<sub>i</sub>)</th>
+          <th>Frec. Abs. (f<sub>i</sub>)</th>
+          <th>Frec. Rel. (fr<sub>i</sub>)</th>
+          <th>Frec. Abs. Acum.</th>
+          <th>Frec. Rel. Acum.</th>
+          <th>Punto medio</th>
+          <th>Frecuencia PM</th>
+          <th>Punto × Frec. (x<sub>i</sub>f<sub>i</sub>)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of frequencyTable">
+          <td>{{item.class}}</td>
+          <td>[{{ item.limiteInferior }} - {{ item.limiteSuperior }}]</td>
+          <td>{{ item.marcaDeClase | number:'1.2-2' }}</td>
+          <td>{{ item.absolute }}</td>
+          <td>{{ item.relative }}</td>
+          <td>{{ item.cumulativeAbsolute }}</td>
+          <td>{{ item.cumulativeRelative }}</td>
+          <td>{{item.puntoMedio | number:'1.2-2' }}</td>
+          <td>{{item.frecuenciaPM}}</td>
+          <td>{{ item.puntoPorFrecuencia }}</td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>Total</strong></td>
+          <td>-</td>
+          <td><strong>{{ total }}</strong></td>
+          <td>-</td>
+          <td>-</td>
+          <td><strong>{{ total | number:'1.2-2' }}</strong></td>
+          <td>-</td>
+          <td>-</td>
+          <td><strong>{{getTotalPuntoFrecuencia() | number:'1.2-2'}}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p class="no-data-message">No hay datos disponibles para generar la tabla de frecuencias.</p>
+  </ng-template>
+
+  <div class="row mt-3">
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary" (click)="toggleHistograma();
+      mostrarHistogramaRelativo = false;
+      mostrarHistogramaAcumulado = false;
+      mostrarHistogramaRelativoAcumulado = false;">
+        {{ mostrarHistograma ? 'Ocultar Histograma' : 'Mostrar Histograma' }}
+      </button>
+      <button type="button" class="btn btn-outline-primary" (click)="toggleHistogramaRelativo();
+      mostrarHistograma = false;
+      mostrarHistogramaAcumulado = false;
+      mostrarHistogramaRelativoAcumulado = false;">
+        {{ mostrarHistogramaRelativo ? 'Ocultar Histograma Relativo' : 'Mostrar Histograma Relativo' }}
+      </button>
+
+      <button type="button" class="btn btn-outline-primary" (click)="toggleHistogramaAcumulado();
+      mostrarHistograma = false;
+      mostrarHistogramaRelativo = false;
+      mostrarHistogramaRelativoAcumulado = false;">
+        {{ mostrarHistogramaAcumulado ? 'Ocultar Histograma Acumulado' : 'Mostrar Histograma Acumulado' }}
+      </button>
+
+      <button type="button" class="btn btn-outline-primary" (click)="toggleHistogramaRelativoAcumulado();
+      mostrarHistograma = false;
+      mostrarHistogramaRelativo = false;
+      mostrarHistogramaAcumulado = false;">
+        {{ mostrarHistogramaRelativoAcumulado ? 'Ocultar Histograma Relativo Acumulado' : 'Mostrar Histograma Relativo Acumulado' }}
+      </button>
+    </div>
+  </div>
+
+  @if(mostrarHistograma && chartOptions) {
+    <div class="chart-container mt-3">
+      <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height: '460px'}"></canvasjs-chart>
+    </div>
+  }
+
+  @if(mostrarHistogramaRelativo && chartOptions) {
+    <div class="chart-container mt-3">
+      <canvasjs-chart [options]="chartOptionsRelative" [styles]="{width: '100%', height: '460px'}"></canvasjs-chart>
+    </div>
+  }
+
+  @if(mostrarHistogramaAcumulado && chartOptions) {
+    <div class="chart-container mt-3">
+        <canvasjs-chart [options]="chartOptionsAcumulado" [styles]="{width: '100%', height: '460px'}"></canvasjs-chart>
+    </div>
+    }
+
+    @if(mostrarHistogramaRelativoAcumulado && chartOptions) {
+      <div class="chart-container mt-3">
+        <canvasjs-chart [options]="chartOptionsRelativeAcumulado" [styles]="{width: '100%', height: '460px'}"></canvasjs-chart>
+      </div>
+    }
+</div>
+

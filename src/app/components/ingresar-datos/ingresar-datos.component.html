@@ -11,15 +11,21 @@
 
         <div class="row">
             <div class="col">
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarTendenciasCentrales = !mostrarTendenciasCentrales;">Tendencia Central</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarTendenciasCentrales = !mostrarTendenciasCentrales;
+                mostrarTabla = false;
+                mostrarTablaParametros = false;">Tendencia Central</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Dispersión</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Forma</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Localización</button> &nbsp;
             </div>
-
             <div class="col">
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Histograma</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Parametros</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarTabla = !mostrarTabla;
+                mostrarTendenciasCentrales = false;
+                mostrarTablaParametros = false;">Histograma</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData();
+                mostrarTablaParametros = !mostrarTablaParametros;
+                mostrarTendenciasCentrales = false;
+                mostrarTabla = false;">Parametros</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Limites Reales</button> &nbsp;
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Cajas y bigotes</button> &nbsp;
             </div> 
@@ -31,6 +37,18 @@
 <div class="container my-4 d-flex justify-content-center">
     @if(mostrarTendenciasCentrales) {
         <app-tendencias-central></app-tendencias-central>
+    }
+</div>
+
+<div class="container my-4 d-flex justify-content-center">
+    @if(mostrarTabla) {
+        <app-histograma></app-histograma>
+    }
+</div>
+
+<div class="container my-4 d-flex justify-content-center">
+    @if(mostrarTablaParametros) {
+        <app-parametros></app-parametros>
     }
 </div>
 

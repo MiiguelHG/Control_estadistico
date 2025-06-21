@@ -3,16 +3,22 @@ import { Component, inject } from '@angular/core';
 import { HotTableModule, HotTableRegisterer } from '@handsontable/angular';
 import Handsontable from 'handsontable';
 import { TendenciasCentralComponent } from "../tendencias-central/tendencias-central.component";
+import { HistogramaComponent } from '../histograma/histograma.component';
 import { MedidasService } from '../../services/medidas/medidas.service';
+import { HistogramaService } from '../../services/histograma/histograma.service';
+import { ParametrosService } from '../../services/parametros/parametros.service';
+import { ParametrosComponent } from '../parametros/parametros.component';
 
 @Component({
   selector: 'app-ingresar-datos',
-  imports: [HotTableModule, TendenciasCentralComponent],
+  imports: [HotTableModule, TendenciasCentralComponent, HistogramaComponent, ParametrosComponent],
   templateUrl: './ingresar-datos.component.html',
   styleUrl: './ingresar-datos.component.css'
 })
 export class IngresarDatosComponent {
   medidasService = inject(MedidasService); // Inyectar el servicio MedidasService
+  histogramaService = inject(HistogramaService); // Inyectar el servicio HistogramaService
+  parametrosService = inject(ParametrosService); // Inyectar el servicio de parámetros
 
   data = [[]]; // Matriz para almacenar los datos de la tabla Handsontable
 
@@ -36,6 +42,8 @@ export class IngresarDatosComponent {
   };
 
   mostrarTendenciasCentrales = false; // Bandera para mostrar u ocultar tendencias centrales
+  mostrarTabla = false; // Bandera para mostrar u ocultar la tabla
+  mostrarTablaParametros = false; // Bandera para mostrar u ocultar la tabla de parámetros
 
   // Funcion para verificar si un valor es un número válido
   private esNumeroValido(valor: any): boolean {
@@ -58,6 +66,8 @@ export class IngresarDatosComponent {
     this.data = datosLimpios.filter(row => row.length > 0); // Filtrar filas vacías y eliminar filas sin datos
 
     this.medidasService.setData(this.data) // Actualizar el servicio con los datos
+    this.histogramaService.setData(this.data); // Actualizar el servicio de histograma con los datos
+    this.parametrosService.setData(this.data); // Actualizar el servicio de parámetros con los datos
   }
 
   // Método para limpiar la tabla

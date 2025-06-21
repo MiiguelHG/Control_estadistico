@@ -1,0 +1,32 @@
+.frequency-table-container {
+  margin: 20px;
+  overflow-x: auto;
+}
+
+.frequency-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.frequency-table th, .frequency-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.frequency-table th {
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+}
+
+.total-row {
+  font-weight: bold;
+  background-color: #f9f9f9;
+}
+
+.no-data-message {
+  color: #666;
+  font-style: italic;
+}
