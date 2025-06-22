@@ -79,6 +79,28 @@ export class HistogramaService {
 
   public getHistogramaFrecuencias(): any{
     const frequencyData = this.getTable();
+    // const numItems = frequencyData.length;
+    
+    // // Cálculo dinámico del dataPointWidth basado en el número de elementos
+    // const baseWidth = 147; // Ancho base para un número estándar de categorías
+    // const minWidth = 30;   // Ancho mínimo para muchas categorías
+    // const maxWidth = 175;  // Ancho máximo para pocas categorías
+    
+    // // Fórmula para calcular el ancho dinámico
+    // let dynamicWidth: number;
+    // let baseWidthAdjusted = (baseWidth * (5.5 / numItems))+12;
+    
+    // if (numItems <= 5) {
+    //     dynamicWidth = maxWidth;
+    // } else if(numItems == 6){
+    //     dynamicWidth = baseWidth;
+    // } else if (numItems <= 14) {
+    //     dynamicWidth = (baseWidth * (5.5 / numItems))+12;
+    // } else {
+    //     dynamicWidth = Math.max(minWidth, baseWidthAdjusted);
+    // }
+    // console.log(`Número de elementos: ${numItems}, Ancho dinámico: ${dynamicWidth}`);
+    // console.log(baseWidthAdjusted)
     
     return {
       animationEnabled: true,
@@ -101,7 +123,7 @@ export class HistogramaService {
         shared: true,
         content: "Valor: {label}<br/>Frecuencia Absoluta: {y}<br/>Frecuencia Relativa: {relative}%",
       },
-      //dataPointWidth: 147, // Ancho máximo de las columnas
+      // dataPointWidth: dynamicWidth, // Ancho máximo de las columnas
       data: [{
         type: "column",
         indexLabelFontSize: 11,
@@ -142,7 +164,7 @@ export class HistogramaService {
         shared: true,
         content: "Valor: {label}<br/>Frecuencia Absoluta: {y}<br/>Frecuencia Relativa: {relative}%",
       },
-      dataPointWidth: 145, // Ancho máximo de las columnas
+    // dataPointWidth: 145, // Ancho máximo de las columnas
       data: [{
         type: "column",
         indexLabelFontSize: 11,
@@ -183,7 +205,7 @@ export class HistogramaService {
         shared: true,
         content: "Valor: {label}<br/>Frecuencia Acumulada: {y}<br/>Frecuencia Relativa: {relative}%",
       },
-      dataPointWidth: 147, // Ancho máximo de las columnas
+      // dataPointWidth: 147, // Ancho máximo de las columnas
       data: [{
         type: "column",
         indexLabelFontSize: 11,
@@ -224,7 +246,7 @@ export class HistogramaService {
         shared: true,
         content: "Valor: {label}<br/>Frecuencia Relativa acumulada: {y}<br/>Frecuencia Relativa: {relative}%",
       },
-      dataPointWidth: 147, // Ancho máximo de las columnas
+      // dataPointWidth: 147, // Ancho máximo de las columnas
       data: [{
         type: "column",
         indexLabelFontSize: 11,

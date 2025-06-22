@@ -1,5 +1,11 @@
 <div class="container my-3 d-flex justify-content-center">
-  <hot-table #spreadsheet [settings]="settingsTable" [hotId]="id"></hot-table>
+  <hot-table #spreadsheet [settings]="settingsTable" [hotId]="id"></hot-table>&nbsp; &nbsp;
+  <div>
+
+      <button type="button" class="btn btn-secondary" (click)="clearTable();">Limpiar</button><br><br>
+      <button type="button" class="btn btn-secondary" (click)="agruparDatos();">Datos agrupados</button><br><br>
+      <button type="button" class="btn btn-secondary" (click)="desagruparDatos();">Datos desagrupados</button>
+  </div>
 </div>
 <div class="container my-4 d-flex justify-content-center">
     
@@ -12,43 +18,111 @@
         <div class="row">
             <div class="col">
                 <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarTendenciasCentrales = !mostrarTendenciasCentrales;
+                mostrarDispersion = false; 
+                mostrarForma = false;
+                mostrarLocalizacion = false;
                 mostrarTabla = false;
-                mostrarTablaParametros = false;">Tendencia Central</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Dispersión</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Forma</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Localización</button> &nbsp;
+                mostrarTablaParametros = false;
+                mostrarGraficasXR = false;
+                mostrarCajaBigotes = false;">Tendencia Central</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarDispersion = !mostrarDispersion;
+                mostrarTendenciasCentrales = false;
+                mostrarForma = false;
+                mostrarLocalizacion = false;
+                mostrarTabla = false;
+                mostrarTablaParametros = false;
+                mostrarGraficasXR = false;
+                mostrarCajaBigotes = false;">Dispersión</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarForma = !mostrarForma;
+                mostrarTendenciasCentrales = false;
+                mostrarDispersion = false;
+                mostrarLocalizacion = false;
+                mostrarTabla = false;
+                mostrarTablaParametros = false;
+                mostrarGraficasXR = false;
+                mostrarCajaBigotes = false;">Forma</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarLocalizacion = !mostrarLocalizacion;
+                mostrarTendenciasCentrales = false;
+                mostrarForma = false;
+                mostrarDispersion = false;
+                mostrarTabla = false;
+                mostrarTablaParametros = false;
+                mostrarGraficasXR = false;
+                mostrarCajaBigotes = false;">Localización</button> &nbsp;
             </div>
             <div class="col">
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarTabla = !mostrarTabla;
+                <button id= "botonHistograma" type="button" class="btn btn-outline-primary" 
+                *ngIf="mostrarHistograma" (click)="getTableData(); mostrarTabla = !mostrarTabla;
                 mostrarTendenciasCentrales = false;
-                mostrarTablaParametros = false;">Histograma</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();
-                mostrarTablaParametros = !mostrarTablaParametros;
+                mostrarTablaParametros = false;
+                mostrarForma = false;
+                mostrarLocalizacion = false;
+                mostrarGraficasXR = false;
+                mostrarCajaBigotes = false;
+                mostrarDispersion;">Histograma</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" 
+                *ngIf="mostrarParametros" (click)="getTableData(); mostrarTablaParametros = !mostrarTablaParametros;
                 mostrarTendenciasCentrales = false;
-                mostrarTabla = false;">Parametros</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Limites Reales</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData();">Cajas y bigotes</button> &nbsp;
+                mostrarTabla = false;
+                mostrarForma = false;
+                mostrarLocalizacion = false;
+                mostrarGraficasXR = false;
+                mostrarCajaBigotes = false;
+                mostrarDispersion = false;">Parámetros</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarGraficasXR = !mostrarGraficasXR;
+                mostrarTendenciasCentrales = false;
+                mostrarTabla = false;
+                mostrarForma = false;
+                mostrarLocalizacion = false;
+                mostrarTablaParametros = false;
+                mostrarCajaBigotes = false;
+                mostrarDispersion = false;">Límites Reales</button> &nbsp;
+                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarCajaBigotes = !mostrarCajaBigotes;
+                mostrarTendenciasCentrales = false;
+                mostrarTabla = false;
+                mostrarForma = false;
+                mostrarLocalizacion = false;
+                mostrarTablaParametros = false;
+                mostrarGraficasXR = false;
+                mostrarDispersion = false;">Cajas y bigotes</button> &nbsp;
             </div> 
 
         </div>
     </div>    
 </div>
 
-<div class="container my-4 d-flex justify-content-center">
-    @if(mostrarTendenciasCentrales) {
-        <app-tendencias-central></app-tendencias-central>
-    }
-</div>
+@if(mostrarTendenciasCentrales) {
+    <app-tendencias-central></app-tendencias-central>
+}
 
 <div class="container my-4 d-flex justify-content-center">
     @if(mostrarTabla) {
-        <app-histograma></app-histograma>
+        <app-histograma *ngIf="mostrarHistograma"></app-histograma>
     }
 </div>
 
 <div class="container my-4 d-flex justify-content-center">
     @if(mostrarTablaParametros) {
-        <app-parametros></app-parametros>
+        <app-parametros *ngIf="mostrarParametros"></app-parametros>
     }
 </div>
 
+@if (mostrarDispersion) {
+    <app-dispersion></app-dispersion>
+}
+
+@if (mostrarForma) {
+    <app-forma></app-forma>
+}
+
+@if (mostrarCajaBigotes) {
+    <app-caja-bigotes></app-caja-bigotes>
+}
+
+@if (mostrarLocalizacion) {
+    <app-localizacion></app-localizacion>
+}
+
+@if (mostrarGraficasXR) {
+    <app-graficasxr></app-graficasxr>
+}

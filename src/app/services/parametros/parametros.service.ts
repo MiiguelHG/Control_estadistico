@@ -165,7 +165,7 @@ export class ParametrosService {
         shared: true,
         content: "Clases: {label}<br/>Frecuencia Absoluta: {y}<br/>Frecuencia Relativa: {relative}%",
       },
-      dataPointWidth: 145, // Ancho máximo de las columnas
+      // dataPointWidth: 145, // Ancho máximo de las columnas
       data: [{
         type: "column",
         indexLabelFontSize: 11,
@@ -206,7 +206,7 @@ export class ParametrosService {
         shared: true,
         content: "Clases: {label}<br/>Frecuencia Acumulada: {y}<br/>Frecuencia Relativa: {relative}%",
       },
-      dataPointWidth: 147, // Ancho máximo de las columnas
+      // dataPointWidth: 147, // Ancho máximo de las columnas
       data: [{
         type: "column",
         indexLabelFontSize: 11,
@@ -247,7 +247,7 @@ export class ParametrosService {
         shared: true,
         content: "Clases: {label}<br/>Frecuencia Relativa acumulada: {y}<br/>Frecuencia Relativa: {relative}%",
       },
-      dataPointWidth: 147, // Ancho máximo de las columnas
+      // dataPointWidth: 147, // Ancho máximo de las columnas
       data: [{
         type: "column",
         indexLabelFontSize: 11,

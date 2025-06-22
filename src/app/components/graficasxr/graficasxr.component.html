@@ -1,0 +1,70 @@
+<div class="frequency-table-container">
+  <h3>Tabla de valores XR</h3>
+  
+  <div *ngIf="frequencyTable.length > 0; else noData">
+    <table class="frequency-table">
+      <thead>
+        <tr>
+          <th>Media (x<sub>i</sub>)</th>
+          <th>LC</th>
+          <th>LCS</th>
+          <th>LCI</th>
+          <th>Rango (R)</th>
+          <th>LC</th>
+          <th>LCS</th>
+          <th>LCI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of frequencyTable">
+          <td>{{ item.media }}</td>
+          <td>{{ item.lc }}</td>
+          <td>{{ item.lcs }}</td>
+          <td>{{ item.lci }}</td>
+          <td>{{ item.rango }}</td>
+          <td>{{ item.lcr }}</td>
+          <td>{{ item.lcsr }}</td>
+          <td>{{ item.lcir }}</td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>{{ mediaDeMedias }}</strong></td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td><strong>{{ mediaDeRangos }}</strong></td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p class="no-data-message">No hay datos disponibles para generar la tabla de frecuencias.</p>
+  </ng-template>
+
+  <div class="row mt-3">
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary" (click)="toggleX();">
+        {{ mostrarX ? 'Ocultar Gráfica X' : 'Mostrar Gráfica X' }}
+      </button>
+      <button type="button" class="btn btn-outline-primary" (click)="toggleR();">
+        {{ mostrarR ? 'Ocultar Gráfica R' : 'Mostrar Gráfica R' }}
+      </button>
+    </div>
+  </div>
+
+  @if(mostrarX && chartOptions) {
+    <div class="chart-container mt-3">
+      <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height: '460px'}"></canvasjs-chart>
+    </div>
+  }
+
+  @if(mostrarR && chartOptions) {
+    <div class="chart-container mt-3">
+      <canvasjs-chart [options]="chartOptionsR" [styles]="{width: '100%', height: '460px'}"></canvasjs-chart>
+    </div>
+  }
+
+</div>
