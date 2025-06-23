@@ -1,12 +1,20 @@
-<div class="container justify-content-center my-3">
-    <button type="button" class="btn btn-outline-primary" (click)="op = 1; calcularCuartiles(4);">Cuartiles</button> &nbsp;
-    <button type="button" class="btn btn-outline-primary" (click)="op = 1; calcularCuartiles(5);">Quintiles</button> &nbsp;
-    <button type="button" class="btn btn-outline-primary" (click)="op = 1; calcularCuartiles(10);">Deciles</button> &nbsp;
-    <button type="button" class="btn btn-outline-primary" (click)="op = 2">Percentiles</button> &nbsp;
+<div class="container d-flex justify-content-center my-4">
+    <button type="button" class="btn" 
+    [ngClass]="seleccion === 1 ? 'btn-primary' : 'btn-outline-primary'"
+    (click)="seleccion=1; op = 1; calcularCuartiles(4);">Cuartiles</button> &nbsp;
+    <button type="button" class="btn" 
+    [ngClass]="seleccion === 2 ? 'btn-primary' : 'btn-outline-primary'"
+    (click)="seleccion=2; op = 1; calcularCuartiles(5);">Quintiles</button> &nbsp;
+    <button type="button" class="btn" 
+    [ngClass]="seleccion === 3 ? 'btn-primary' : 'btn-outline-primary'"
+    (click)="seleccion=3; op = 1; calcularCuartiles(10);">Deciles</button> &nbsp;
+    <button type="button" class="btn" 
+    [ngClass]="seleccion === 4 ? 'btn-primary' : 'btn-outline-primary'"
+    (click)="seleccion=4; op = 2">Percentiles</button> &nbsp;
 </div>
-<div class="container">
+<div class="container d-flex justify-content-center my-3">
 @if (op === 1) {
-    <table class="table">
+    <table class="table w-50">
         <thead>
             <tr>
             <th scope="col">#</th>
@@ -28,7 +36,7 @@
     <form class="row g-3">
         <div class="col-auto">
             <label for="staticEmail2" class="visually-hidden">Percentil</label>
-            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" [value]="'Percentil: ' + this.res">
+            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" [value]="'Valor: ' + this.res">
         </div>
         <div class="col-auto">
             <label for="inputPassword2" class="visually-hidden">Percentil</label>

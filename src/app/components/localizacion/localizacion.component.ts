@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { MedidasService } from '../../services/medidas/medidas.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-localizacion',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './localizacion.component.html',
   styleUrl: './localizacion.component.css'
 })
@@ -13,6 +14,7 @@ export class LocalizacionComponent {
   medidasService = inject(MedidasService);
 
   op = 0;
+  seleccion = 0; // Selección del tipo de cuartil, decil o percentil
   prefix = 'Q'; // Prefijo para los cuartiles
   listCuartiles: number[] = [];
   percentil: number = 0; // Valor del percentil a calcular
@@ -40,6 +42,12 @@ export class LocalizacionComponent {
       alert('El percentil debe estar entre 1 y 99');
       return;
     }
+
+    if (this.percentil % 1 !== 0) {
+      alert('El percentil debe ser un número entero');
+      return;
+    }
+    
     const value = this.medidasService.getLocalizacion(this.percentil, 100);
     const formatted = Number.isInteger(value) ? value : Number(value.toFixed(1));
     this.res = formatted; // Asignar el resultado formateado al atributo res

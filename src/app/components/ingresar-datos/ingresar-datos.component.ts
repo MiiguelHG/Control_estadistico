@@ -38,12 +38,12 @@ export class IngresarDatosComponent {
     data: [[]],          // matriz con una fila/columna vacía
     rowHeaders: true,
     colHeaders: true,
-    minRows: 10,         // cantidad mínima de filas visibles
+    minRows: 15,         // cantidad mínima de filas visibles
     minCols: 20,          // cantidad mínima de columnas visibles
     minSpareRows: 1,
     minSpareCols: 1,
-    width: 650,       // para ajustar al contenedor
-    height: 280,
+    width: 700,       // para ajustar al contenedor
+    height: 350,
     plugings: [Handsontable.plugins.CopyPaste],
     copyPaste: true, // Habilitar el plugin de copiar y pegar
     licenseKey: 'non-commercial-and-evaluation',
@@ -57,6 +57,14 @@ export class IngresarDatosComponent {
   mostrarCajaBigotes = false; // Bandera para mostrar u ocultar caja y bigotes
   mostrarLocalizacion = false; // Bandera para mostrar u ocultar localización
   mostrarGraficasXR = false; // Bandera para mostrar u ocultar gráficas X-R
+
+  mostrarHistograma: boolean = false;
+  mostrarParametros: boolean = false;
+  datosAgrupados: boolean = false; // Controla si los datos están agrupados o no
+
+  constructor() {
+    this.desagruparDatos(); // Inicialmente, los datos no están agrupados
+  }
 
   // Funcion para verificar si un valor es un número válido
   private esNumeroValido(valor: any): boolean {
@@ -81,6 +89,18 @@ export class IngresarDatosComponent {
     this.medidasService.setData(this.data) // Actualizar el servicio con los datos
     this.histogramaService.setData(this.data); // Actualizar el servicio de histograma con los datos
     this.parametrosService.setData(this.data); // Actualizar el servicio de parámetros con los datos
+    // this.graficasXRService.setData(this.data);
+  }
+
+  getTableDataXR() {
+    const hotInstance = this.hotRegisterer.getInstance(this.id);
+    const data = hotInstance?.getData() || [];
+
+    // Conservar los datos numericos en la matriz data y elimiminar el resto de los datos
+    const datosLimpios = data.map(row => row.filter((valor: any) => this.esNumeroValido(valor)).map((valor: any) => Number(valor)));
+
+    this.data = datosLimpios.filter(row => row.length > 0); // Filtrar filas vacías y eliminar filas sin datos
+
     this.graficasXRService.setData(this.data);
   }
 
@@ -90,10 +110,6 @@ export class IngresarDatosComponent {
     hotInstance?.clear();
     this.data = [[]]; // Reiniciar la matriz de datos
   }
-
-  mostrarHistograma: boolean = false;
-  mostrarParametros: boolean = false;
-  datosAgrupados: boolean = false; // Controla si los datos están agrupados o no
 
   // Métodos para manejar los botones
   agruparDatos() {

@@ -1,5 +1,65 @@
-<div class="container my-4 text-centercontainer my-4 text-center">
-    <p>El sesgo es: {{sesgo}}</p>
-    <p>Sesgo estandarizado: {{sesgoEstandar}}</p>
-    <p>El coeficiente de curtosis es: {{curtosis}}</p>
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <div class="container my-4 d-flex justify-content-center">
+          <table class="table w-50">
+            <tbody>
+              <tr>
+                <th scope="row">Sesgo: </th>
+                <td>{{sesgo}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Sesgo estandarizado:</th>
+                <td>{{sesgoEstandar}}</td>
+              </tr>
+            </tbody>
+          </table>
+      
+      </div>
+      
+      <div  class="container my-4 d-flex justify-content-center">
+          @if(sesgoEstandar > 0) {
+              <!-- <p>La distribución es asimétrica positiva</p> -->
+              <img src="media/positiva.png" class="img-thumbnail" alt="...">
+          } @else if(sesgoEstandar < 0) {
+              <!-- <p>La distribución es asimétrica negativa</p> -->
+              <img src="media/negativa.png" class="img-thumbnail" alt="...">
+          } @else {
+              <img src="media/normal.png" class="img-thumbnail" alt="...">
+              <!-- <p>La distribución es simétrica</p> -->
+          }
+      
+      </div>
+    </div>
+    <div class="col">
+      <div class="container my-4 d-flex justify-content-center">
+          <table class="table w-50">
+            <tbody>
+              <tr>
+                <th scope="row"> </th>
+                <td> </td>
+              </tr>
+              <tr>
+                <th scope="row">Curtosis: </th>
+                <td>{{curtosis}}</td>
+              </tr>
+          </tbody>
+          </table>
+      </div>
+      
+      <div class="container my-4 d-flex justify-content-center">
+          @if(curtosis > 0.263) {
+              <!-- <p>La distribución es leptocúrtica</p> -->
+              <img src="media/lepto.png" class="img-thumbnail" alt="...">
+          } @else if(curtosis < 0.263) {
+              <!-- <p>La distribución es platicúrtica</p> -->
+              <img src="media/plati.png" class="img-thumbnail" alt="...">
+          } @else {
+              <img src="media/normal.png" class="img-thumbnail" alt="...">
+              <!-- <p>La distribución es mesocúrtica</p> -->
+          }
+      </div>
+    </div>
+  </div>
 </div>
+

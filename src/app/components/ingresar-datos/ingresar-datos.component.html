@@ -1,23 +1,29 @@
+<div  class="container my-3 d-flex justify-content-center" style="background-color: cornflowerblue;">
+  <h1 class="h1">Control Estadístico</h1>
+</div>
+
 <div class="container my-3 d-flex justify-content-center">
   <hot-table #spreadsheet [settings]="settingsTable" [hotId]="id"></hot-table>&nbsp; &nbsp;
   <div>
 
       <button type="button" class="btn btn-secondary" (click)="clearTable();">Limpiar</button><br><br>
-      <button type="button" class="btn btn-secondary" (click)="agruparDatos();">Datos agrupados</button><br><br>
-      <button type="button" class="btn btn-secondary" (click)="desagruparDatos();">Datos desagrupados</button>
+      <button type="button" class="btn" [ngClass]="datosAgrupados ? 'btn-danger' : 'btn-secondary'" (click)="agruparDatos();">Agrupados</button><br><br>
+      <button type="button" class="btn" [ngClass]="datosAgrupados ? 'btn-secondary' : 'btn-danger'" (click)="desagruparDatos();">Desagrupados</button>
   </div>
 </div>
 <div class="container my-4 d-flex justify-content-center">
     
-    <div class="container text-center">
-        <div class="row">
-            <div class="col">Medidas</div>
-            <div class="col">Distribución</div>
+    <div class="container text-center shadow p-3 mb-5 bg-body-tertiary rounded">
+        <div class="row mb-3">
+            <div class="col"><h1 class="display-6">Medidas</h1></div>
+            <div class="col"><h1 class="display-6">Distribución</h1></div>
         </div>
 
         <div class="row">
             <div class="col">
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarTendenciasCentrales = !mostrarTendenciasCentrales;
+                <button type="button" class="btn" 
+                [ngClass]="mostrarTendenciasCentrales ? 'btn-primary' : 'btn-outline-primary'"
+                (click)="getTableData(); mostrarTendenciasCentrales = !mostrarTendenciasCentrales;
                 mostrarDispersion = false; 
                 mostrarForma = false;
                 mostrarLocalizacion = false;
@@ -25,7 +31,9 @@
                 mostrarTablaParametros = false;
                 mostrarGraficasXR = false;
                 mostrarCajaBigotes = false;">Tendencia Central</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarDispersion = !mostrarDispersion;
+                <button type="button" class="btn" 
+                [ngClass]="mostrarDispersion ? 'btn-primary' : 'btn-outline-primary'"
+                (click)="getTableData(); mostrarDispersion = !mostrarDispersion;
                 mostrarTendenciasCentrales = false;
                 mostrarForma = false;
                 mostrarLocalizacion = false;
@@ -33,7 +41,9 @@
                 mostrarTablaParametros = false;
                 mostrarGraficasXR = false;
                 mostrarCajaBigotes = false;">Dispersión</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarForma = !mostrarForma;
+                <button type="button" class="btn" 
+                [ngClass]="mostrarForma ? 'btn-primary' : 'btn-outline-primary'"
+                (click)="getTableData(); mostrarForma = !mostrarForma;
                 mostrarTendenciasCentrales = false;
                 mostrarDispersion = false;
                 mostrarLocalizacion = false;
@@ -41,7 +51,9 @@
                 mostrarTablaParametros = false;
                 mostrarGraficasXR = false;
                 mostrarCajaBigotes = false;">Forma</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarLocalizacion = !mostrarLocalizacion;
+                <button type="button" class="btn" 
+                [ngClass]="mostrarLocalizacion ? 'btn-primary' : 'btn-outline-primary'"
+                (click)="getTableData(); mostrarLocalizacion = !mostrarLocalizacion;
                 mostrarTendenciasCentrales = false;
                 mostrarForma = false;
                 mostrarDispersion = false;
@@ -51,7 +63,8 @@
                 mostrarCajaBigotes = false;">Localización</button> &nbsp;
             </div>
             <div class="col">
-                <button id= "botonHistograma" type="button" class="btn btn-outline-primary" 
+                <button id= "botonHistograma" type="button" class="btn" 
+                [ngClass]="mostrarTabla ? 'btn-primary' : 'btn-outline-primary'"
                 *ngIf="mostrarHistograma" (click)="getTableData(); mostrarTabla = !mostrarTabla;
                 mostrarTendenciasCentrales = false;
                 mostrarTablaParametros = false;
@@ -60,7 +73,8 @@
                 mostrarGraficasXR = false;
                 mostrarCajaBigotes = false;
                 mostrarDispersion;">Histograma</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" 
+                <button type="button" class="btn" 
+                [ngClass]="mostrarTablaParametros ? 'btn-primary' : 'btn-outline-primary'"
                 *ngIf="mostrarParametros" (click)="getTableData(); mostrarTablaParametros = !mostrarTablaParametros;
                 mostrarTendenciasCentrales = false;
                 mostrarTabla = false;
@@ -69,7 +83,9 @@
                 mostrarGraficasXR = false;
                 mostrarCajaBigotes = false;
                 mostrarDispersion = false;">Parámetros</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarGraficasXR = !mostrarGraficasXR;
+                <button type="button" class="btn" 
+                [ngClass]="mostrarGraficasXR ? 'btn-primary' : 'btn-outline-primary'"
+                (click)="getTableDataXR(); mostrarGraficasXR = !mostrarGraficasXR;
                 mostrarTendenciasCentrales = false;
                 mostrarTabla = false;
                 mostrarForma = false;
@@ -77,7 +93,9 @@
                 mostrarTablaParametros = false;
                 mostrarCajaBigotes = false;
                 mostrarDispersion = false;">Límites Reales</button> &nbsp;
-                <button type="button" class="btn btn-outline-primary" (click)="getTableData(); mostrarCajaBigotes = !mostrarCajaBigotes;
+                <button type="button" class="btn" 
+                [ngClass]="mostrarCajaBigotes ? 'btn-primary' : 'btn-outline-primary'"
+                (click)="getTableData(); mostrarCajaBigotes = !mostrarCajaBigotes;
                 mostrarTendenciasCentrales = false;
                 mostrarTabla = false;
                 mostrarForma = false;
