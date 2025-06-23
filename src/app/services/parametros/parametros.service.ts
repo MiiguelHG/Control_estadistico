@@ -14,6 +14,15 @@ export interface FrequencyData {
   cumulativeRelative: number;
 }
 
+export interface Datos {
+  numeroDatos: number;
+  valorMaximo: number;
+  valorMinimo: number;
+  rango: number;
+  numeroClases: number;
+  amplitud: number;    
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -263,5 +272,35 @@ export class ParametrosService {
       }]
     }
   }
+
+  public getDatos(): Datos[] {
+      const array = this.matrizToArray();
+
+      if (!array || array.length === 0) {
+        return [];
+      }
+
+      // Ordenar el array para asegurar correcta distribución
+      const sortedArray = [...array].sort((a, b) => a - b);
+      const minValue = Math.min(...sortedArray);
+      const maxValue = Math.max(...sortedArray);
+      const rango = Number((maxValue - minValue).toFixed(2));
+      const n = sortedArray.length;
+      const numClasses = Math.ceil(1 + 3.322 * Math.log10(n));
+      const amplitud = Number((rango / numClasses).toFixed(4));
+
+      const datos: Datos[] = [];
+
+        datos.push({
+        numeroDatos: n,
+        valorMaximo: Number(maxValue.toFixed(2)),
+        valorMinimo: Number(minValue.toFixed(2)),
+        rango: rango,
+        numeroClases: numClasses,
+        amplitud: amplitud
+        });
+
+      return datos;
+    }
 
 }

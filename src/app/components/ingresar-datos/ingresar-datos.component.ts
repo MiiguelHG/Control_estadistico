@@ -38,12 +38,12 @@ export class IngresarDatosComponent {
     data: [[]],          // matriz con una fila/columna vacía
     rowHeaders: true,
     colHeaders: true,
-    minRows: 15,         // cantidad mínima de filas visibles
+    minRows: 20,         // cantidad mínima de filas visibles
     minCols: 20,          // cantidad mínima de columnas visibles
     minSpareRows: 1,
     minSpareCols: 1,
-    width: 700,       // para ajustar al contenedor
-    height: 350,
+    width: 1050,       // para ajustar al contenedor
+    height: 450,
     plugings: [Handsontable.plugins.CopyPaste],
     copyPaste: true, // Habilitar el plugin de copiar y pegar
     licenseKey: 'non-commercial-and-evaluation',

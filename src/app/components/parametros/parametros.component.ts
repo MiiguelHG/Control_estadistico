@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ParametrosService, FrequencyData } from '../../services/parametros/parametros.service';
+import { ParametrosService, FrequencyData, Datos } from '../../services/parametros/parametros.service';
 import { CommonModule } from '@angular/common';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
@@ -16,6 +16,7 @@ export class ParametrosComponent implements OnInit {
   chartOptionsRelativeAcumulado: any;
   parametrosSevice = inject(ParametrosService); // Inyectar el servicio ParametrosService
   frequencyTable: FrequencyData[] = [];
+  datosTable: Datos[] = [];
   total: number = 0;
   mostrarHistograma: boolean = false;
   mostrarHistogramaRelativo: boolean = false;
@@ -36,6 +37,7 @@ export class ParametrosComponent implements OnInit {
   }
 
   private calculateFrequencyTable(): void {
+    this.datosTable = this.parametrosSevice.getDatos();
     this.frequencyTable = this.parametrosSevice.getTable();
     this.total = this.parametrosSevice.getTotal();
     this.getTotalPuntoFrecuencia();

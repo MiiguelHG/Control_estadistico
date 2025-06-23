@@ -1,6 +1,43 @@
 <div class="frequency-table-container">
+  <h3>Tabla de Parámetros</h3>
+  <div *ngIf="datosTable.length > 0; else noData">
+    <table class="frequency-table">
+      <thead>
+        <tr>
+          <th>Número de datos</th>
+          <th>Valor máximo</th>
+          <th>Valor mínimo</th>
+          <th>Rango</th>
+          <th>Clases</th>
+          <th>Amplitud</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of datosTable">
+          <td>{{item.numeroDatos}}</td>
+          <td>{{ item.valorMaximo | number:'1.2-2' }}</td>
+          <td>{{ item.valorMinimo | number:'1.2-2' }}</td>
+          <td>{{ item.rango | number:'1.2-2' }}</td>
+          <td>{{ item.numeroClases | number:'1.2-2' }}</td>
+          <td>{{ item.amplitud | number:'1.2-4' }}</td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>Total</strong></td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td><strong>{{ total | number:'1.2-2' }}</strong></td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td><strong>{{getTotalPuntoFrecuencia() | number:'1.2-2'}}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <h3>Tabla de Frecuencias de datos agrupados</h3>
-  
   <div *ngIf="frequencyTable.length > 0; else noData">
     <table class="frequency-table">
       <thead>
@@ -33,10 +70,11 @@
         <tr class="total-row">
           <td><strong>Total</strong></td>
           <td>-</td>
-          <td><strong>{{ total }}</strong></td>
+          <td>-</td>
           <td>-</td>
           <td>-</td>
           <td><strong>{{ total | number:'1.2-2' }}</strong></td>
+          <td>-</td>
           <td>-</td>
           <td>-</td>
           <td><strong>{{getTotalPuntoFrecuencia() | number:'1.2-2'}}</strong></td>
